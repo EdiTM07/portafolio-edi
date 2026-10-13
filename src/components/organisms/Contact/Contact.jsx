@@ -8,12 +8,30 @@ export const Contact = () => {
   const [status, setStatus] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Tu número de WhatsApp (Ejemplo: Ecuador 593 + número sin el 0)
+  // 1. NUEVO: Estado para controlar los valores de los inputs en tiempo real
+  const [formValues, setFormValues] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
   const whatsappNumber = '593985365554'; 
   const whatsappMessage = language === 'es' 
     ? 'Hola Edison, vi tu portafolio y me gustaría conversar contigo.' 
     : 'Hi Edison, I saw your portfolio and would like to chat with you.';
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  // 2. NUEVO: Función para actualizar el estado cada vez que el usuario escribe
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues(prev => ({ ...prev, [name]: value }));
+  };
+
+  // 3. NUEVO: Validación en tiempo real (verifica que ningún campo esté vacío)
+  const isFormValid = 
+    formValues.name.trim() !== '' && 
+    formValues.email.trim() !== '' && 
+    formValues.message.trim() !== '';
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -34,7 +52,8 @@ export const Contact = () => {
 
       if (data.success) {
         setStatus(language === 'es' ? '¡Mensaje enviado con éxito!' : 'Message sent successfully!');
-        event.target.reset(); // Limpia el formulario
+        // NUEVO: Limpiamos los estados controlados para vaciar los inputs
+        setFormValues({ name: '', email: '', message: '' }); 
       } else {
         setStatus(language === 'es' ? 'Hubo un error, inténtalo de nuevo.' : 'There was an error, please try again.');
       }
@@ -49,7 +68,6 @@ export const Contact = () => {
   return (
     <div className={styles.contactContainer}>
       
-      {/* Columna Izquierda: Texto y WhatsApp */}
       <div className={styles.textSection}>
         <h3>{language === 'es' ? 'Hablemos' : 'Let\'s Talk'}</h3>
         <p>
@@ -63,7 +81,6 @@ export const Contact = () => {
         </Button>
       </div>
 
-      {/* Columna Derecha: Formulario Web3Forms */}
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.formGroup}>
           <label htmlFor="name" className={styles.label}>
@@ -73,6 +90,8 @@ export const Contact = () => {
             type="text" 
             id="name" 
             name="name" 
+            value={formValues.name}       /* Asignamos el valor del estado */
+            onChange={handleChange}       /* Escuchamos los cambios */
             className={styles.input} 
             required 
             placeholder="John Doe"
@@ -87,6 +106,8 @@ export const Contact = () => {
             type="email" 
             id="email" 
             name="email" 
+            value={formValues.email}      /* Asignamos el valor del estado */
+            onChange={handleChange}       /* Escuchamos los cambios */
             className={styles.input} 
             required 
             placeholder="john@example.com"
@@ -100,13 +121,16 @@ export const Contact = () => {
           <textarea 
             id="message" 
             name="message" 
+            value={formValues.message}    /* Asignamos el valor del estado */
+            onChange={handleChange}       /* Escuchamos los cambios */
             className={styles.textarea} 
             required 
             placeholder={language === 'es' ? 'Escribe tu mensaje aquí...' : 'Write your message here...'}
           ></textarea>
         </div>
 
-        <Button type="submit" variant="primary" disabled={isSubmitting}>
+        {/* 4. MODIFICADO: Se deshabilita si está enviando O si el formulario no es válido */}
+        <Button type="submit" variant="primary" disabled={isSubmitting || !isFormValid}>
           {isSubmitting 
             ? (language === 'es' ? 'Enviando...' : 'Sending...') 
             : (language === 'es' ? 'Enviar Mensaje' : 'Send Message')}

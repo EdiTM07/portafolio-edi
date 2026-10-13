@@ -2,28 +2,34 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.6rem 1.25rem; /* Un poco más estilizados y menos toscos */
+  padding: 0.6rem 1.25rem;
   border-radius: var(--border-radius-md); 
   font-size: 0.9rem;
-  font-weight: 500; /* Bajamos el peso de la fuente para más elegancia */
+  font-weight: 500;
   cursor: pointer;
-  border: 1px solid transparent; /* Borde ultra fino */
+  border: 1px solid transparent;
   transition: all var(--transition-speed) ease;
   font-family: inherit;
 }
 
 .btn:disabled {
-  opacity: 0.5;
+  background-color: var(--border-color);
+  color: var(--text-secondary);
   cursor: not-allowed;
+  opacity: 0.7;
+}
+.button:disabled:hover {
+  transform: none;
+  background-color: var(--border-color);
 }
 
 /* El botón principal ahora es Negro (o Blanco en modo oscuro) */
 .primary {
-  background-color: var(--text-primary); /* Fondo azul marino/oscuro inicial */
-  color: var(--bg-primary); /* Texto crema/blanco */
-  position: relative; /* Necesario para contener el pseudo-elemento */
-  overflow: hidden; /* Evita que el color se salga de los bordes redondeados */
-  z-index: 1; /* Mantiene el texto por encima del color de llenado */
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
 }
 
 /* La capa de color que hará la animación */
@@ -34,25 +40,25 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--accent-color); /* Color terracota */
-  z-index: -1; /* Coloca la capa detrás del texto */
+  background-color: var(--accent-color);
+  z-index: -1;
   
   /* Configuración de la animación de izquierda a derecha */
   transform-origin: left;
-  transform: scaleX(0); /* Inicialmente tiene tamaño 0 (no se ve) */
+  transform: scaleX(0);
   transition: transform var(--transition-speed) ease;
 }
 
 /* Lo que sucede al hacer hover en el botón */
 .primary:hover:not(:disabled) {
-  color: #ffffff; /* Asegura que el texto contraste bien con el terracota */
-  transform: translateY(-1px); /* Mantiene la pequeña elevación elegante */
+  color: #ffffff;
+  transform: translateY(-1px);
   border-color: var(--accent-color);
 }
 
 /* Animamos la capa de color al hacer hover */
 .primary:hover:not(:disabled)::before {
-  transform: scaleX(1); /* Escala al 100% de su tamaño */
+  transform: scaleX(1);
 }
 
 /* El botón secundario es estilo 'Ghost' (Fantasma) */
