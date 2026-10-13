@@ -1,0 +1,16 @@
+.langBtn {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+}
+
+.langBtn:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}

@@ -1,0 +1,28 @@
+.toggleBtn {
+  background: transparent;
+  border: 1px solid var(--border-color); /* Borde fino minimalista */
+  cursor: pointer;
+  padding: 0.35rem; /* Un poco más cuadrado */
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-speed) ease;
+}
+
+.toggleBtn:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.3s ease;
+}

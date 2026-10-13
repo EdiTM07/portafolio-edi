@@ -1,0 +1,76 @@
+.contactContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: flex-start;
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+  .contactContainer {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+.textSection h3 {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.textSection p {
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  background-color: var(--bg-secondary);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  border: 1px solid var(--border-color);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: inherit;
+  transition: border-color var(--transition-speed) ease;
+}
+
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+.statusMessage {
+  margin-top: 1rem;
+  font-weight: 600;
+  color: var(--accent-color);
+  text-align: center;
+}

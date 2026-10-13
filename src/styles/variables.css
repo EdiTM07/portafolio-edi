@@ -1,0 +1,88 @@
+/* Importamos la fuente 'Inter', un estándar para este tipo de minimalismo */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap');
+
+:root {
+  /* Fondo Crema Cálido */
+  --bg-primary: #f8f7f3;     
+  --bg-secondary: #ebe9e1;   
+  
+  /* Azul Marino / Pizarra Oscuro para textos principales y botones */
+  --text-primary: #2f355c;   
+  --text-secondary: #4f5d75; 
+  
+  /* Naranja Terracota para los acentos (Hi!, my name is...) */
+  --accent-color: #e7472b;   
+  --accent-hover: #bf5945;
+  
+  --border-color: #dfdcd3;
+  --btn-text: #ffffff;
+  
+  --transition-speed: 0.4s;
+  --border-radius-lg: 16px;
+  --border-radius-md: 4px; /* Botones más rectangulares, menos redondeados */
+}
+
+/* En modo oscuro, invertimos manteniendo el acento terracota */
+[data-theme='dark'] {
+  --bg-primary: #1a1b20;     
+  --bg-secondary: #24262d;   
+  --text-primary: #f8f7f3;   
+  --text-secondary: #a0a4b8; 
+  --accent-color: #d66853;   
+  --accent-hover: #e07a66;
+  --border-color: #363945;
+  --btn-text: #ffffff;
+}
+
+/* =========================================
+   RESETS Y ESTILOS GLOBALES
+   ========================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  /* Aplicamos la nueva tipografía */
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
+  line-height: 1.5;
+  
+  /* Suavizado de fuentes para que se vean más nítidas en Mac y Windows */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll suave para los enlaces ancla */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* =========================================
+   CUSTOM SCROLLBAR (Minimalista)
+   ========================================= */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}

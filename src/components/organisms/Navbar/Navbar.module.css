@@ -1,0 +1,186 @@
+.header {
+  position: relative;
+  z-index: 1000;
+  background-color: var(--bg-primary);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background-color var(--transition-speed) ease, border-color var(--transition-speed) ease;
+}
+[data-theme='dark'] .header {
+  background-color: var(--bg-primary); 
+}
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+}
+
+.brandSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.logoWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* El logo pierde el color vibrante y usa una tipografía geométrica pesada */
+.logo {
+  font-size: 2rem;
+  font-weight: 800; 
+  font-family: 'Courier New', Courier, monospace; /* Simula el 'type-writer' de Tim */
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+.logo:hover {
+  color: var(--accent-color);
+}
+
+.mobileControls {
+  display: none;
+  gap: 1rem;
+  align-items: center;
+}
+
+.desktopControls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  border-left: 1px solid var(--border-color);
+  padding-left: 1rem;
+}
+
+.nav {
+  display: flex;
+}
+
+.menu {
+ display: flex;
+  gap: 2.5rem; 
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.menuItem {
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+/* Línea que crece desde el centro (margin: auto) */
+.menuItem::after {
+  display: block;
+  content: '';
+  width: 0;
+  height: 1px;
+  margin: 4px auto 0 auto; 
+  background-color: transparent;
+  transition: width 0.2s ease-in-out, background-color 0.2s ease-in-out;
+}
+
+.menuItem:hover {
+  transform: scale(1.1); /* Efecto zoom de Tim */
+}
+
+.menuItem:hover::after {
+  width: 100%;
+  background-color: var(--accent-color);
+}
+/* Enlaces estilo editorial: Mayúsculas, pequeños y espaciados */
+.link {
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: color 0.2s ease-in-out;
+  padding: 0.5rem 0;
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
+.menuItem:hover .link {
+  color: var(--accent-color);
+}
+
+
+/* Botón Hamburguesa oculto en escritorio */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 24px;
+  height: 24px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 10;
+}
+
+.line {
+  width: 24px;
+  height: 2px;
+  background-color: var(--text-primary);
+  transition: all 0.3s linear;
+  position: relative;
+  transform-origin: 1px;
+}
+
+/* Animaciones para convertir las 3 líneas en una X */
+.lineTop { transform: rotate(45deg); }
+.lineMiddle { opacity: 0; transform: translateX(20px); }
+.lineBottom { transform: rotate(-45deg); }
+
+/* Ajustes para Móviles */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem 1.5rem;
+  }
+
+  .brandSection {
+    width: 100%;
+  }
+
+  /* Muestra los controles debajo del logo */
+  .mobileControls {
+    display: flex; 
+  }
+
+  /* Oculta los controles de la derecha */
+  .desktopControls {
+    display: none; 
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Oculta los enlaces de navegación por defecto */
+  .nav {
+    width: 100%;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-in-out;
+  }
+
+  /* Expande el menú cuando isOpen es true */
+  .navOpen {
+    max-height: 400px;
+    margin-top: 1rem;
+  }
+
+  .menu {
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+}

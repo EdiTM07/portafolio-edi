@@ -1,0 +1,121 @@
+.sidebar {
+  position: fixed;
+  left: 2.5rem;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 50;
+}
+.backToTop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  margin-bottom: 6rem;
+  
+  /* Oculto por defecto */
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s ease;
+}
+/* Cuando se hace scroll, se vuelve visible */
+.backToTop.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.backToTop:hover {
+  color: var(--accent-color);
+}
+
+/* =========================================
+   ANIMACIÓN DE PALPITACIÓN PARA LA FLECHA
+   ========================================= */
+@keyframes palpitar {
+  0% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-4px) scale(1.15); }
+  100% { transform: translateY(0) scale(1); }
+}
+
+.arrow {
+  margin-bottom: 0.8rem;
+  animation: palpitar 1.5s infinite ease-in-out; 
+}
+
+.backToTop:hover .arrow {
+  animation: palpitar 0.8s infinite ease-in-out;
+}
+
+/* El texto vertical */
+.verticalText {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: lowercase;
+  color: inherit;
+}
+
+.iconContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.iconLink {
+  color: var(--text-primary);
+  transition: color 0.3s ease, transform 0.3s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.iconLink:hover {
+  color: var(--accent-color);
+  transform: translateY(-3px);
+}
+
+.tooltip {
+  position: absolute;
+  left: 150%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-10px);
+  background-color: #1a1a1a; /* Fondo oscuro */
+  color: #ffffff;
+  padding: 0.4rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  border-radius: 4px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+}
+
+.iconLink:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0);
+}
+
+/* La línea vertical sólida que conecta con el final de la página */
+.line {
+  width: 2px;
+  height: 75px;
+  background-color: var(--text-primary);
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .sidebar {
+    display: none;
+  }
+}

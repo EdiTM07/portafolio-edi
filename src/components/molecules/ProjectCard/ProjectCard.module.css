@@ -1,0 +1,70 @@
+.card {
+  background-color: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+  height: 100%;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+  border-color: var(--accent-color);
+}
+
+.type {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--accent-color);
+  margin-bottom: 0.5rem;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.description {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  flex-grow: 1; /* Empuja los botones hacia abajo si hay espacio extra */
+}
+
+.techList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  list-style: none;
+}
+
+.techItem {
+  background-color: var(--bg-secondary);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  transition: all var(--transition-speed) ease;
+  cursor: default;
+}
+
+.techItem:hover {
+  background-color: rgba(37, 99, 235, 0.1);
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+}

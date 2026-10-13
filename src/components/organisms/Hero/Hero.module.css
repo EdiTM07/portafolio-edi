@@ -1,0 +1,124 @@
+.hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: center;
+  min-height: calc(100vh - 80px);
+  padding: 1rem 0;
+
+}
+
+.textContent {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.emoji {
+  display: inline-block;
+  animation: wave 2.5s infinite;
+  transform-origin: 70% 70%;
+}
+
+.name {
+  font-size: clamp(1.75rem,3.25vw, 2.75rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.1;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 2rem;
+  max-width: 100%;
+}
+
+.actions {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.imageContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.imageWrapper {
+  background-color: #d66853; 
+  width: 100%;
+  max-width: 260px;
+  aspect-ratio: 3 / 4.5; /* Mantiene el contenedor cuadrado */
+  position: relative; /* Clave para posicionar la imagen dentro */
+  border-radius: 1rem;
+  clip-path: inset(-30% -25% 0 -25% round 1rem);
+}
+
+/* Soporte para modo oscuro en la caja de la imagen */
+[data-theme='dark'] .imageWrapper {
+  background-color: #1e3a5f; 
+}
+
+.profilePic {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%; /* La imagen toca los bordes laterales del contenedor */
+  height: 130%; /* La imagen es 20% más alta que el contenedor cuadrado (sobresale) */
+  object-fit: cover;
+  object-position: bottom center; /* Ancla los hombros a la base del contenedor */
+  
+  /* Aseguramos que las esquinas inferiores sigan el borde redondeado del contenedor */
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  display: block;
+}
+
+/* Animación de saludo */
+@keyframes wave {
+  0% { transform: rotate( 0.0deg) }
+  10% { transform: rotate(14.0deg) }
+  20% { transform: rotate(-8.0deg) }
+  30% { transform: rotate(14.0deg) }
+  40% { transform: rotate(-4.0deg) }
+  50% { transform: rotate(10.0deg) }
+  60% { transform: rotate( 0.0deg) }
+  100% { transform: rotate( 0.0deg) }
+}
+
+/* Responsivo para móviles */
+@media (max-width: 768px) {
+  .hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: 2rem;
+  }
+
+  .textContent {
+    align-items: center;
+    order: 2; /* Pasa el texto debajo de la foto en móvil */
+  }
+
+  .description {
+    max-width: 100%;
+  }
+
+  .actions {
+    justify-content: center;
+  }
+
+  .imageContent {
+    justify-content: center;
+    order: 1;
+  }
+  .imageWrapper {
+    max-width: 200px;
+  }
+}

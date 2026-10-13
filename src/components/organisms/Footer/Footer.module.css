@@ -1,0 +1,16 @@
+.footer {
+  border-top: 1px solid var(--border-color);
+  padding: 2rem;
+  text-align: center;
+  margin-top: auto; /* Empuja el footer siempre al fondo */
+}
+
+.text {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+}
+
+.highlight {
+  color: var(--accent-color);
+  font-weight: 600;
+}
