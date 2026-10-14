@@ -1,51 +1,38 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom'; // 1. Importamos createPortal
 import styles from './Modal.module.css';
 
 export const Modal = ({ isOpen, onClose, children }) => {
-  // Cierra el modal con la tecla Escape
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape') onClose();
-    };
     if (isOpen) {
-      document.addEventListener('keydown', handleKeyDown);
-      // Evita que el usuario haga scroll en la página de fondo
-      document.body.style.overflow = 'hidden'; 
-    }
-    return () => {
-      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'hidden';
+    } else {
       document.body.style.overflow = 'unset';
-    };
-  }, [isOpen, onClose]);
+    }
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 
-  // Cierra si el usuario hace clic en el fondo oscuro (overlay)
   const handleOverlayClick = (e) => {
-    if (e.target === e.currentTarget) onClose();
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
-  return (
-    <div 
-      className={styles.overlay} 
-      onClick={handleOverlayClick}
-      role="dialog"
-      aria-modal="true"
-    >
+  // 2. Envolvemos el JSX que ya tenías dentro de createPortal()
+  return createPortal(
+    <div className={styles.overlay} onClick={handleOverlayClick}>
       <div className={styles.modalContent}>
-        <button 
-          className={styles.closeButton} 
-          onClick={onClose}
-          aria-label="Cerrar modal"
-        >
-          {/* Icono de cerrar (X) en SVG nativo */}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
+        <button className={styles.closeButton} onClick={onClose} aria-label="Cerrar modal">
+          &times;
         </button>
-        {children}
+        
+        <div className={styles.innerContent}>
+          {children}
+        </div>
       </div>
-    </div>
+    </div>,
+    document.body // 3. Le indicamos que lo inyecte directamente en el body del HTML
   );
 };
