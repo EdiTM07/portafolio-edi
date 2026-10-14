@@ -1,7 +1,7 @@
 export const skillsData = [
   {
     category: "Frontend",
-    items: ["React", "Tailwind CSS", "HTML5", "CSS3"]
+    items: ["Vite","React", "Tailwind CSS", "HTML5", "CSS3"]
   },
   {
     category: "Mobile",
@@ -9,7 +9,7 @@ export const skillsData = [
   },
   {
     category: "Backend & BD",
-    items: ["Node.js", "PHP (CodeIgniter 4)", "MySQL", "SQL Server", "Firebase", "Supabase"]
+    items: ["Node.js", "PHP (CodeIgniter 4)", "Python","MySQL", "SQL Server", "Firebase", "Supabase"]
   },
   {
     category: "Herramientas",

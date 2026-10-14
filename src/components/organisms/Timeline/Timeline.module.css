@@ -1,180 +1,180 @@
 .timelineContainer {
-  display: flex;
-  justify-content: space-between;
   position: relative;
+  max-width: 800px;
+  margin: 4rem auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+  padding: 2rem 0;
+  
+}
+
+/* =========================================
+   ESTRUCTURA DE FILAS (INTERCALADAS)
+   ========================================= */
+.timelineRow {
+  display: flex;
   width: 100%;
-  margin: 2rem 0;
-  gap: 1rem;
-}
-
-/* La línea conectora horizontal */
-.timelineContainer::before {
-  content: '';
-  position: absolute;
-  top: 11px; /* Alineada al centro de los puntos */
-  left: 0;
-  right: 0;
-  height: 2px;
-  background-color: var(--border-color);
-  z-index: 0;
-}
-
-.timelineItem {
   position: relative;
-  z-index: 1;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
   align-items: center;
-  text-align: center;
-  cursor: pointer;
+  z-index: 2;
 }
 
-/* El Punto de cada hito */
-.dot {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background-color: var(--bg-primary);
-  border: 4px solid var(--accent-color);
-  margin-bottom: 1rem;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+.rowLeft {
+  justify-content: flex-start;
+  padding-right: 15%;
 }
 
-.timelineItem:hover .dot {
-  transform: scale(1.3);
-  background-color: var(--accent-color);
+.rowRight {
+  justify-content: flex-end;
+  padding-left: 15%;
 }
 
-/* Contenido siempre visible (Año y Título corto) */
-.visibleContent {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+/* =========================================
+   LA LÍNEA CONECTORA (ESTILO "HECHA A MANO")
+   ========================================= */
+.connector {
+  position: absolute;
+  top: -5px; 
+  left: 20%; 
+  width: 60%;
+  height: calc(100% + 3.5rem); 
+  z-index: -2; 
+  pointer-events: none;
+}
+.svgCurve {
+  width: 100%;
+  height: 100%;
+  overflow: visible; 
+}
+
+.svgPath {
+  fill: none;
+  stroke: var(--text-primary); 
+  stroke-width: 2px; 
+  stroke-linecap: round; 
+  transition: stroke-dashoffset 0.1s ease-out;
+}
+
+/* =========================================
+   EL PIN (TACHUELA EN LA TARJETA)
+   ========================================= */
+.centerDivider {
+  position: absolute;
+  top: -15px; 
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.pinIcon {
+  font-size: 2.5rem;
+  color: var(--text-secondary);
+  filter: drop-shadow(0 4px 4px rgba(0,0,0,0.3));
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.4s ease, filter 0.4s ease;
+  transform: scale(0) rotate(-20deg); 
+}
+
+.pinActive {
+  transform: scale(1) rotate(0deg);
+  color: var(--accent-color);
+  filter: drop-shadow(0 0 5px var(--text-secondary)) drop-shadow(0 4px 4px rgba(0,0,0,0.3));
+}
+
+/* =========================================
+   TARJETAS (TAMAÑO REDUCIDO Y OPTIMIZADO)
+   ========================================= */
+.cardWrapper {
+  width: 100%;
+  max-width: 310px;
+  position: relative;
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.rowLeft .cardWrapper { transform: rotate(-3deg); }
+.rowRight .cardWrapper { transform: rotate(3deg); }
+
+.rowLeft .hidden { opacity: 0; transform: translateX(-40px) rotate(-8deg); }
+.rowRight .hidden { opacity: 0; transform: translateX(40px) rotate(8deg); }
+
+.rowLeft .visible { opacity: 1; transform: translateX(0) rotate(-3deg); }
+.rowRight .visible { opacity: 1; transform: translateX(0) rotate(3deg); }
+
+.card {
+  background-color: var(--bg-primary); 
+  border: 1px solid var(--border-color);
+  padding: 1.5rem 1.25rem 1.25rem 1.25rem; 
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08);
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.cardWrapper:hover .card {
+  transform: translateY(-5px) rotate(1deg);
+  box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15);
 }
 
 .year {
-  font-size: 0.75rem;
-  font-weight: 700;
-  background-color: var(--accent-color);
-  color: var(--btn-text);
-  padding: 0.2rem 0.6rem;
-  border-radius: 1rem;
-  margin-bottom: 0.5rem;
+  display: inline-block;
+  font-size: 0.95rem; 
+  font-weight: 800;
+  color: var(--accent-color);
+  margin-bottom: 0.4rem;
 }
 
 .title {
-  font-size: 0.9rem;
+  font-size: 1.05rem; 
   color: var(--text-primary);
-  font-weight: 600;
-  max-width: 150px; /* Evita que el título se expanda demasiado */
+  margin-bottom: 0.25rem;
+  font-weight: 700;
   line-height: 1.3;
 }
 
-/* Tarjeta flotante (Hover) con la descripción */
-.hoverCard {
-  position: absolute;
-  top: 100%; /* Aparece debajo del título */
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  width: 280px;
-  background-color: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  padding: 1.25rem;
-  border-radius: 0.75rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 10;
-  pointer-events: none; /* Evita parpadeos si el ratón toca la tarjeta */
-}
-
-/* Flechita superior del tooltip */
-.hoverCard::before {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  width: 12px;
-  height: 12px;
-  background-color: var(--bg-secondary);
-  border-left: 1px solid var(--border-color);
-  border-top: 1px solid var(--border-color);
-}
-
-.timelineItem:hover .hoverCard {
-  opacity: 1;
-  visibility: visible;
-  transform: translateX(-50%) translateY(20px);
-}
-
 .institution {
-  color: var(--accent-color);
-  font-size: 0.85rem;
-  font-weight: 700;
-  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem;
+  font-weight: 600;
 }
 
 .description {
-  color: var(--text-secondary);
-  font-size: 0.85rem;
+  font-size: 0.85rem; 
   line-height: 1.5;
-  text-align: left;
+  color: var(--text-secondary);
 }
 
-/* Diseño Responsivo para Móviles (Donde no hay Hover real) */
+/* =========================================
+   DISEÑO PARA MÓVILES
+   ========================================= */
 @media (max-width: 768px) {
   .timelineContainer {
-    flex-direction: column;
-    gap: 2rem;
+    gap: 2.5rem;
   }
   
-  .timelineContainer::before {
-    top: 0; left: 11px; bottom: 0; height: auto; width: 2px;
-  }
-
-  .timelineItem {
-    flex-direction: row;
-    align-items: flex-start;
-    text-align: left;
-  }
-
-  .dot {
-    margin-right: 1.5rem;
-    margin-bottom: 0;
-    flex-shrink: 0;
-  }
-
-  .visibleContent {
-    align-items: flex-start;
-  }
-
-  .title {
-    max-width: 100%;
-    margin-bottom: 0.5rem;
-  }
-
-  /* En móviles, la información se muestra siempre fija y compacta */
-  .hoverCard {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-    width: 100%;
-    box-shadow: none;
-    padding: 0;
-    border: none;
-    background: transparent;
-    pointer-events: auto;
-  }
-
-  .hoverCard::before {
+  .connector {
     display: none;
   }
 
-  .timelineItem:hover .hoverCard {
-    transform: none;
+  .rowLeft, .rowRight {
+    justify-content: center;
+    padding: 0 1rem;
+  }
+
+  .rowLeft .cardWrapper, .rowRight .cardWrapper {
+    transform: rotate(0deg); 
+    max-width: 100%;
+  }
+
+  .rowLeft .hidden, .rowRight .hidden {
+    transform: translateY(30px) rotate(0deg);
+  }
+
+  .rowLeft .visible, .rowRight .visible {
+    transform: translateY(0) rotate(0deg);
+  }
+  
+  .centerDivider {
+    top: -12px;
   }
 }
