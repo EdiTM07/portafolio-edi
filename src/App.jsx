@@ -6,6 +6,7 @@ import { FadeIn } from './components/atoms/FadeIn/FadeIn';
 import { Contact } from './components/organisms/Contact/Contact';
 import { About } from './components/organisms/About/About';
 import { Timeline } from './components/organisms/Timeline/Timeline';
+import { Toaster } from 'react-hot-toast';
 import { projectsData } from './data/projects';
 import { useLanguage } from './hooks/useLanguage';
 import styles from './App.module.css';
@@ -19,7 +20,6 @@ function App() {
       <div className={styles.container}>
         {/* Sección 1: Presentación */}
         <Hero />
-
         {/* Sección 2: Sobre Mí */}
         <section id="sobre-mi" className={styles.section}>
           <FadeIn>
@@ -67,6 +67,18 @@ function App() {
           <Contact />
           </FadeIn>
         </section>
+        <Toaster 
+        position="bottom-center"
+        toastOptions={{
+          style: {
+            background: 'var(--bg-secondary)',
+            color: 'var(--text-primary)',
+            border: '1px solid var(--border-color)',
+            borderRadius: '0.75rem',
+            fontSize: '0.9rem',
+          },
+        }}
+      />
       </div>
     </MainLayout>
   )

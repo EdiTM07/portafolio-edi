@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLanguage } from '../../../hooks/useLanguage';
 import { Button } from '../../atoms/Button/Button';
 import { Modal } from '../Modal/Modal';
+import toast from 'react-hot-toast'; // Importación de la librería
 import styles from './ProjectCard.module.css';
 
 export const ProjectCard = ({ project }) => {
@@ -10,8 +11,22 @@ export const ProjectCard = ({ project }) => {
   
   const title = project.title[language];
   const description = project.description[language];
-  // Validamos que el proyecto tenga caso de estudio
+  
   const hasCaseStudy = !!project.caseStudy; 
+
+  // Función para manejar clics en enlaces vacíos
+  const handleLinkClick = (url) => {
+    if (!url || url === '#' || url === '') {
+      toast(
+        language === 'es' 
+          ? 'En construcción 🚧. Pronto estará disponible.' 
+          : 'Under construction 🚧. Coming soon.',
+        { icon: '✨' }
+      );
+    } else {
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+  };
 
   return (
     <>
@@ -32,26 +47,21 @@ export const ProjectCard = ({ project }) => {
               {language === 'es' ? 'Caso de Estudio' : 'Case Study'}
             </Button>
           ) : (
-            // Fallback si el proyecto no tiene caso de estudio aún, mostramos el demo
-            project.links.demo && (
-              <Button variant="primary" onClick={() => window.open(project.links.demo, '_blank')}>
-                {language === 'es' ? 'Ver Proyecto' : 'Live Demo'}
-              </Button>
-            )
-          )}
-          
-          {project.links.github && (
-            <Button variant="outline" onClick={() => window.open(project.links.github, '_blank', 'noopener,noreferrer')}>
-              GitHub
+            <Button variant="primary" onClick={() => handleLinkClick(project.links?.demo)}>
+              {language === 'es' ? 'Ver Proyecto' : 'Live Demo'}
             </Button>
           )}
+          
+          <Button variant="outline" onClick={() => handleLinkClick(project.links?.github)}>
+            GitHub
+          </Button>
         </div>
       </article>
 
-      {/* El Modal que se abre al hacer clic */}
+      {/* Modal */}
       {hasCaseStudy && (
         <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-          {/* Contenido del Caso de Estudio */}
+          {/* Caso de Estudio */}
           <div style={{ paddingRight: '1rem' }}>
             <span className={styles.type}>{project.type}</span>
             <h2 style={{ fontSize: '1.75rem', marginBottom: '1.5rem', color: 'var(--text-primary)' }}>
@@ -77,16 +87,14 @@ export const ProjectCard = ({ project }) => {
             </div>
 
             <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
-              {project.links.demo && (
-                <Button variant="primary" onClick={() => window.open(project.links.demo, '_blank', 'noopener,noreferrer')}>
-                  {language === 'es' ? 'Ver Proyecto en Vivo' : 'View Live Project'}
-                </Button>
-              )}
-              {project.links.github && (
-                <Button variant="outline" onClick={() => window.open(project.links.github, '_blank', 'noopener,noreferrer')}>
-                  {language === 'es' ? 'Ver Código Fuente' : 'View Source Code'}
-                </Button>
-              )}
+              {/* Botones dentro del modal */}
+              <Button variant="primary" onClick={() => handleLinkClick(project.links?.demo)}>
+                {language === 'es' ? 'Ver Proyecto en Vivo' : 'View Live Project'}
+              </Button>
+              
+              <Button variant="outline" onClick={() => handleLinkClick(project.links?.github)}>
+                {language === 'es' ? 'Ver Código Fuente' : 'View Source Code'}
+              </Button>
             </div>
           </div>
         </Modal>

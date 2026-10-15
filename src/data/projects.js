@@ -12,7 +12,7 @@ export const projectsData = [
     technologies: ["React", "MySQL", "Node.js", "APIs"],
     type: "Web App",
     links: {
-      github: "https://github.com/tu-usuario/sita", 
+      github: "", 
       demo: null 
     },
     caseStudy: {
@@ -39,8 +39,8 @@ export const projectsData = [
     technologies: ["PHP", "CodeIgniter 4", "MySQL", "Tailwind CSS"],
     type: "SaaS Web",
     links: {
-      github: "https://github.com/tu-usuario/pos-invisible",
-      demo: "https://tu-demo.com"
+      github: "",
+      demo: ""
     },
     caseStudy: {
       challenge: {
@@ -66,8 +66,8 @@ export const projectsData = [
     technologies: ["Flutter", "Dart", "ArcGIS APIs", "Figma"],
     type: "Mobile App",
     links: {
-      github: null,
-      demo: "https://play.google.com/..."
+      github: "",
+      demo: ""
     }
   },
   {
@@ -83,8 +83,8 @@ export const projectsData = [
     technologies: ["React", "Firebase", "Tailwind CSS"],
     type: "Web App",
     links: {
-      github: "https://github.com/tu-usuario/global-events",
-      demo: "https://global-events-demo.com"
+      github: "",
+      demo: ""
     }
   }
 ];
